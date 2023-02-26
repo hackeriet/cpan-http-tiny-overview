@@ -1,4 +1,4 @@
-% use Mojo::Util qw(trim);
+% use Mojo::Util qw(trim xml_escape);
 <!doctype html>
 <html class="no-js" lang="">
     <head>
@@ -80,8 +80,8 @@
         <p>
             Keep in mind that this data is automatically generated and not
             edited manually, it probably contains errors and false positives.
-            Some distros flagged might for instance not need https or certificate
-            verification.
+            Some distros flagged might for instance not need https or
+            certificate verification.
         </p>
         <p>
             You can <a href="results.json">download the JSON data</a> used to
@@ -103,7 +103,7 @@
                                 <a href="<%= $match->{source_url} %>" style='color:#555;'><%= $match->{file_path} %>:<%=  $match->{line_number} %></a>
                             </td>
                             <td>
-                                <code><%= trim(substr($match->{lines}->{text}, 0, 120)) %></code>
+                                <code><%= xml_escape(trim(substr($match->{lines}->{text}, 0, 120))) %></code>
                             </td>
                         </tr>
                     % }
