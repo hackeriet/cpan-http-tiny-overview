@@ -80,11 +80,12 @@
         <p>
             Keep in mind that this data is automatically generated and not
             edited manually, it probably contains errors and false positives.
-            You can <a href="results.json">download the JSON data</a> used to
-            generate this overview and the code is at <a href="https://github.com/hackeriet/cpan-http-tiny-overview">hackeriet/cpan-http-tiny-overview</a>
+            Some distros flagged might for instance not need https or certificate
+            verification.
         </p>
         <p>
-            It's CPAN source is from <a href="https://github.com/metacpan/metacpan-cpan-extracted/tree/<%= $results->{repo_rev} %>">metacpan-cpan-extracted</a> <%= $results->{repo_log} %>
+            You can <a href="results.json">download the JSON data</a> used to
+            generate this overview and the code is at <a href="https://github.com/hackeriet/cpan-http-tiny-overview">hackeriet/cpan-http-tiny-overview</a>. It's CPAN source is  <a href="https://github.com/metacpan/metacpan-cpan-extracted/tree/<%= $results->{repo_rev} %>">metacpan-cpan-extracted</a> <%= $results->{repo_log} %>
         </p>
 
 
