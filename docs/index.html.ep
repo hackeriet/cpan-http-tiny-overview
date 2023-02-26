@@ -61,9 +61,10 @@
             <li><a href="https://github.com/chansen/p5-http-tiny/pull/151">chansen/p5-http-tiny: SSL environment controls, and warn about insecure connections #151</a>
             <li><a href="https://www.reddit.com/r/perl/comments/111tadi/psa_httptiny_disabled_ssl_verification_by_default/">reddit: PSA: HTTP::Tiny disabled SSL verification by default!</a></li>
             <li><a href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=954089">Debian Bug #954089: perl: Default HTTP::Tiny to verifying SSL certificates</a></li>
+            <li><a href="https://salsa.debian.org/perl-team/interpreter/perl/-/commit/1490431e40e22052f75a0b3449f1f53cbd27ba92.patch">[PATCH] Enable SSL by default in HTTP::Tiny</a></li>
+
             <li><a href="https://github.com/chansen/p5-http-tiny/issues/134">chansen/p5-http-tiny: verify_SSL being true by default (redux) #134</a></li>
             <li><a href="https://github.com/NixOS/nixpkgs/pull/187480">NixOS/nixpkgs:  perl: verify_SSL=>1 by default in HTTP::Tiny #187480</a></li>
-
         </ul>
         <h2>Searching through CPAN</h2>
         <p>
