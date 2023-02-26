@@ -1,2 +1,0 @@
-new HTTP::Tiny
-HTTP::Tiny->new
