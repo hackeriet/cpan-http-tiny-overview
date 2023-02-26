@@ -79,16 +79,16 @@
         </ul>
 
         <p>
-            Keep in mind that this data is automatically generated and not
-            edited manually, it probably contains errors and false positives.
-            Some distros flagged might for instance not need https or
-            certificate verification.
-        </p>
-        <p>
             You can <a href="results.json">download the JSON data</a> used to
             generate this overview and the code is at <a href="https://github.com/hackeriet/cpan-http-tiny-overview">hackeriet/cpan-http-tiny-overview</a>. It's CPAN source is  <a href="https://github.com/metacpan/metacpan-cpan-extracted/tree/<%= $results->{repo_rev} %>">metacpan-cpan-extracted</a> <%= $results->{repo_log} %>
         </p>
 
+        <p>
+            <b>These lists are automatically generated, and not
+            manually reviewed</b>, they do contain false positives. A distribution
+            on this list is not necessarily vulnerable. Some distros might for
+            instance not need https or certificate verification.
+        </p>
 
         % my $distro_block = begin
         % my $distro_name = shift;
@@ -115,6 +115,7 @@
 
 
         <h2>HTTP::Tiny without verify_SSL: <span class="warning"><%= @$without_verify_SSL %></span></h2>
+
         <table>
             <tr>
                 <th>Distribution</th>
