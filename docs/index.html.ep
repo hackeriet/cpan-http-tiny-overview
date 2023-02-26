@@ -47,7 +47,7 @@
             Perl's core HTTP client <code>HTTP::Tiny</code> does not verify TLS
             certificates by default. To enable verification users must
             pass <code>verify_SSL=>1</code> to the constructor. Although this
-            behaviour is intentional and documented, it appears that quite a few
+            behaviour is <a href="https://metacpan.org/pod/HTTP::Tiny#SSL-SUPPORT">intentional and documented</a>, it appears that quite a few
             distributions on CPAN does not enable this flag possibly exposing
             users to MitM attacks.
         </p>
