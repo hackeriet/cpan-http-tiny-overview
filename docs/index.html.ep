@@ -52,8 +52,10 @@
             users to MitM attacks.
         </p>
         <p>
-
-        <h2>References</h2>
+            The purpose of this page is to get an overview of the situation in
+            CPAN.
+        </p>
+        <h2>Discussions</h2>
         <ul>
             <li><a href="https://github.com/chansen/p5-http-tiny/pull/151">chansen/p5-http-tiny: SSL environment controls, and warn about insecure connections #151</a>
             <li><a href="https://www.reddit.com/r/perl/comments/111tadi/psa_httptiny_disabled_ssl_verification_by_default/">reddit: PSA: HTTP::Tiny disabled SSL verification by default!</a></li>
