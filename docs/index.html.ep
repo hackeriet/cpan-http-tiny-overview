@@ -48,7 +48,7 @@
             certificates by default. To enable verification users must
             pass <code>verify_SSL=>1</code> to the constructor. Although this
             behaviour is intentional and documented, it appears that quite a few
-            distributions on CPAN does not enable this flag exposing unaware
+            distributions on CPAN does not enable this flag possibly exposing
             users to MitM attacks.
         </p>
         <p>
@@ -60,7 +60,7 @@
             <li><a href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=954089">Debian Bug #954089: perl: Default HTTP::Tiny to verifying SSL certificates</a></li>
             <li><a href="https://github.com/chansen/p5-http-tiny/issues/134">chansen/p5-http-tiny: verify_SSL being true by default (redux) #134</a>
         </ul>
-        <h2>Searching trough CPAN</h2>
+        <h2>Searching through CPAN</h2>
         <p>
             To try to get an idea of the distributions using HTTP::Tiny without
             specifying the cert verification behaviour, we've searched trough
@@ -69,13 +69,13 @@
             somewhere in the code are flagged as possibly problematic.
         </p>
         <ul>
-            <li>With HTTP::Tiny but without verify_SSL: <span class="warning"><%= @$without_verify_SSL %></a></li>
+            <li>With HTTP::Tiny, but without verify_SSL: <span class="warning"><%= @$without_verify_SSL %></a></li>
             <li>With verify_SSL: <span class="success"><%= @$with_verify_SSL %></a></li>
         </ul>
 
         <p>
             Keep in mind that this data is automatically generated and not
-            curated manually, it probably contains errors and false positives.
+            edited manually, it probably contains errors and false positives.
             You can <a href="results.json">download the JSON data</a> used to
             generate this overview and the code is at <a href="https://github.com/hackeriet/cpan-http-tiny-overview">hackeriet/cpan-http-tiny-overview</a>
         </p>
