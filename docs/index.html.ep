@@ -1,0 +1,139 @@
+% use Mojo::Util qw(trim);
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>HTTP::Tiny, verify_SSL=&gt;0 default, and CPAN distributions</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="simple.min.css">
+        <style>
+            body {grid-template-columns: 1fr min(90%) 1fr; }
+            .nested-table {
+                margin:0;
+            }
+            .nested-table tr {
+                border:0;
+                background:none;
+            }
+            .nested-table td {
+                border:0;
+                background:none;
+                margin:0;
+                padding:0;
+            }
+            .nested-table td:first-child {
+                max-width:200px;
+                width:200px;
+                white-space: nowrap;                   
+                overflow: hidden;
+                text-overflow: ellipsis;
+                direction: rtl; 
+                text-align: right;
+                padding-right:5px;
+            }
+            .warning {
+                color: red;
+            }
+            .success {
+                color: green;
+            } 
+        </style>
+    </head>
+    <body>
+        <h1>HTTP::Tiny, <code>verify_SSL=>0</code> default, and CPAN distributions</h1>
+        <p>
+            Perl's core HTTP client <code>HTTP::Tiny</code> does not verify TLS
+            certificates by default. To enable verification users must
+            pass <code>verify_SSL=>1</code> to the constructor. Although this
+            behaviour is intentional and documented, it appears that quite a few
+            distributions on CPAN does not enable this flag exposing unaware
+            users to MitM attacks.
+        </p>
+        <p>
+
+        <h2>References</h2>
+        <ul>
+            <li><a href="https://github.com/chansen/p5-http-tiny/pull/151">chansen/p5-http-tiny: SSL environment controls, and warn about insecure connections #151</a>
+            <li><a href="https://www.reddit.com/r/perl/comments/111tadi/psa_httptiny_disabled_ssl_verification_by_default/">reddit: PSA: HTTP::Tiny disabled SSL verification by default!</a></li>
+            <li><a href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=954089">Debian Bug #954089: perl: Default HTTP::Tiny to verifying SSL certificates</a></li>
+            <li><a href="https://github.com/chansen/p5-http-tiny/issues/134">chansen/p5-http-tiny: verify_SSL being true by default (redux) #134</a>
+        </ul>
+        <h2>Searching trough CPAN</h2>
+        <p>
+            To try to get an idea of the distributions using HTTP::Tiny without
+            specifying the cert verification behaviour, we've searched trough
+            metacpan-cpan-extracted with a couple of ripgrep patterns. Distros
+            using HTTP::Tiny, but doesn't mention `verify_SSL` or `verify_ssl`
+            somewhere in the code are flagged as possibly problematic.
+        </p>
+        <ul>
+            <li>With HTTP::Tiny but without verify_SSL: <span class="warning"><%= @$without_verify_SSL %></a></li>
+            <li>With verify_SSL: <span class="success"><%= @$with_verify_SSL %></a></li>
+        </ul>
+
+        <p>
+            Keep in mind that this data is automatically generated and not
+            curated manually, it probably contains errors and false positives.
+            You can <a href="results.json">download the JSON data</a> used to
+            generate this overview and the code is at <a href="https://github.com/hackeriet/cpan-http-tiny-overview">hackeriet/cpan-http-tiny-overview</a>
+        </p>
+        <p>
+            It's CPAN source is from <a href="https://github.com/metacpan/metacpan-cpan-extracted/tree/<%= $results->{repo_rev} %>">metacpan-cpan-extracted</a> <%= $results->{repo_log} %>
+        </p>
+
+
+        % my $distro_block = begin
+        % my $distro_name = shift;
+            % my $d = $results->{distros}->{$distro_name};
+            <tr>
+                <td valign=top><a href="<%= $d->{distro_url} %>"><%= $distro_name %></td>
+                <td>
+                    <table class="nested-table">
+                    % foreach my $match (@{$d->{matches}}) {
+
+                        <tr>
+                            <td>
+                                <a href="<%= $match->{source_url} %>" style='color:#555;'><%= $match->{file_path} %>:<%=  $match->{line_number} %></a>
+                            </td>
+                            <td>
+                                <code><%= trim(substr($match->{lines}->{text}, 0, 120)) %></code>
+                            </td>
+                        </tr>
+                    % }
+                    </table>
+                </td>
+            </tr>
+        % end
+
+
+        <h2>HTTP::Tiny without verify_SSL: <span class="warning"><%= @$without_verify_SSL %></span></h2>
+        <table>
+            <tr>
+                <th>Distribution</th>
+                <th>Lines</th>
+            </tr>
+        % foreach my $distro_name (@$without_verify_SSL) {
+            %= $distro_block->($distro_name);
+        % }
+        </table>
+
+
+
+        <h2>With verify_SSL: <span class="success"><%= @$with_verify_SSL %></span></h2>
+        <table>
+            <tr>
+                <th>Distribution</th>
+                <th>Lines</th>
+            </tr>
+        % foreach my $distro_name (@$with_verify_SSL) {
+            %= $distro_block->($distro_name);
+        % }
+        </table>
+
+
+
+
+    </body>
+</html>

@@ -54,7 +54,7 @@ foreach my $d (sort keys %$distros) {
     $html .= "<a href='$source' style='color:#555;'><small>$file_path:<b>$ln</b></small></a>";
     $html .= "</td><td>";
     $html .= "<code style='text-overflow:ellipsis;overflow: hidden;white-space: nowrap;'>";
-    $html .= xml_escape(substr( $m->{lines}->{text}, 0, 120 ));
+    $html .= xml_escape(trim(substr( $m->{lines}->{text}, 0, 120 ));
     $html .= "</code></a><br>";
     $html .= "</td></tr>";
   }

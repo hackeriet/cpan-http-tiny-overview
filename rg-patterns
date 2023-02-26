@@ -1,0 +1,5 @@
+verify_ssl
+verify_SSL
+new\s+HTTP::Tiny
+HTTP::Tiny->new\s*\(.+?\)
+HTTP::Tiny->new
