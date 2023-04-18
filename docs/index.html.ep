@@ -45,34 +45,7 @@
         <h1>HTTP::Tiny, <code>verify_SSL=>0</code> default, and CPAN distributions</h1>
         <small>2023-02-26 &middot; sgo</small>
         <p>
-            Perl's core HTTP client <code>HTTP::Tiny</code> does not verify TLS
-            certificates by default. To enable verification users must
-            pass <code>verify_SSL=>1</code> to the constructor. Although this
-            behaviour is <a href="https://metacpan.org/pod/HTTP::Tiny#SSL-SUPPORT">intentional and documented</a>, it appears that quite a few
-            distributions on CPAN does not enable this flag possibly exposing
-            users to MitM attacks.
-        </p>
-        <p>
-            The purpose of this page is to get an overview of the situation in
-            CPAN.
-        </p>
-        <h2>Discussions</h2>
-        <ul>
-            <li><a href="https://github.com/chansen/p5-http-tiny/pull/151">chansen/p5-http-tiny: SSL environment controls, and warn about insecure connections #151</a>
-            <li><a href="https://www.reddit.com/r/perl/comments/111tadi/psa_httptiny_disabled_ssl_verification_by_default/">reddit: PSA: HTTP::Tiny disabled SSL verification by default!</a></li>
-            <li><a href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=954089">Debian Bug #954089: perl: Default HTTP::Tiny to verifying SSL certificates</a></li>
-            <li><a href="https://salsa.debian.org/perl-team/interpreter/perl/-/commit/1490431e40e22052f75a0b3449f1f53cbd27ba92.patch">[PATCH] Enable SSL by default in HTTP::Tiny</a></li>
-
-            <li><a href="https://github.com/chansen/p5-http-tiny/issues/134">chansen/p5-http-tiny: verify_SSL being true by default (redux) #134</a></li>
-            <li><a href="https://github.com/NixOS/nixpkgs/pull/187480">NixOS/nixpkgs:  perl: verify_SSL=>1 by default in HTTP::Tiny #187480</a></li>
-        </ul>
-        <h2>Searching through CPAN</h2>
-        <p>
-            To try to get an idea of the distributions using HTTP::Tiny without
-            specifying the cert verification behaviour, we've searched trough
-            metacpan-cpan-extracted with a couple of ripgrep patterns. Distros
-            using HTTP::Tiny, but doesn't mention `verify_SSL` or `verify_ssl`
-            somewhere in the code are flagged as possibly problematic.
+            See <a href="https://blog.hackeriet.no/perl-http-tiny-insecure-tls-default-affects-cpan-modules/">Perl's HTTP::Tiny has insecure TLS default, affecting CPAN.pm and other modules</a> for context
         </p>
         <ul>
             <li>With HTTP::Tiny, but without verify_SSL: <span class="warning"><%= @$without_verify_SSL %></a></li>
@@ -93,9 +66,10 @@
 
         % my $distro_block = begin
         % my $distro_name = shift;
+        % my $color = shift // "";
             % my $d = $results->{distros}->{$distro_name};
             <tr>
-                <td valign=top><a href="<%= $d->{distro_url} %>"><%= $distro_name %></td>
+                <td valign=top style="<%= $color ? "border-left: 3px solid $color" : "" %>"><a href="<%= $d->{distro_url} %>"><%= $distro_name %></td>
                 <td>
                     <table class="nested-table">
                     % foreach my $match (@{$d->{matches}}) {
@@ -123,7 +97,7 @@
                 <th>Lines</th>
             </tr>
         % foreach my $distro_name (@$without_verify_SSL) {
-            %= $distro_block->($distro_name);
+            %= $distro_block->($distro_name, "red");
         % }
         </table>
 
@@ -136,7 +110,7 @@
                 <th>Lines</th>
             </tr>
         % foreach my $distro_name (@$with_verify_SSL) {
-            %= $distro_block->($distro_name);
+            %= $distro_block->($distro_name,"green");
         % }
         </table>
 
